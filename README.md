@@ -9,32 +9,70 @@
 - **Web Interface**: Simple and user-friendly Flask web application
 - **GPU Acceleration**: Automatically uses CUDA if available for faster inference
 
-### Setup Instruction
+# Installation Guide for Object Detection Application
 
-1. 
-   ** If you install from Github, clone the repository:
-   # Open Command Promt (Windows) /  Terminal (macOS/Linux)
-   Direct to the path where you want to store application.
-   Then insert these code respectively:
-   
-   "git clone https://github.com/Huygraf/Object-Detection.git"
-   
-   "cd Object_Detection"
+This guide provides simple instructions to install and run the Object Detection application.
 
-   ** If you install from source folder, download archive file and extract them.
+## Prerequisites - Must Install
+- Python 3.8 or newer
+- Internet connection (required for the first run to download model components)
 
-2. Install the required dependencies:
-   - Direct to the path of your Application folder.
-   - Insert this code to install required dependencies:
-      "pip install -r requirements.txt"
+## Easy Installation
+
+### Windows Users
+
+1. Double-click the `install_and_run_windows.bat` file
+2. The script will:
+   - Check if Python is installed
+   - Create a virtual environment
+   - Install all required dependencies
+   - Start the application automatically
+
+3. When the application starts, open your web browser and go to: http://127.0.0.1:5000
+
+### Mac/Linux Users
+
+1. Open Terminal
+2. Navigate to the project directory:
+
+   cd path/to/project
+ 
+3. Make the installation script executable:
+
+   chmod +x install_and_run.sh
+
+4. Run the installation script:
+
+   ./install_and_run.sh
+
+5. When the application starts, open your web browser and go to: http://127.0.0.1:5000
+
+## Manual Installation (Alternative)
+
+If you prefer to install dependencies manually:
+
+1. Open Command Prompt (Windows) or Terminal (Mac/Linux)
+2. Navigate to the project directory
+3. Create a virtual environment (optional but recommended):
+   - Windows: `python -m venv venv` then `venv\Scripts\activate`
+   - Mac/Linux: `python3 -m venv venv` then `source venv/bin/activate`
+4. Install dependencies:
+
+   pip install -r requirements.txt
+
+5. Run the application:
+   - Windows: `python -m flask run --debug`
+   - Mac/Linux: `python3 -m flask run --debug`
+
+
 
 ## Usage
 
-1. Start the Flask server:
+1. Start the Flask server (use for manual installation):
    - Insert this code to run Flask server:
       "flask run --debug"
 
-2. Open your web browser and go to:
+2. Open your web browser and go to (use for manual installation):
       "http://127.0.0.1:5000"
 
 3. Upload one or multiple images using the file selector
