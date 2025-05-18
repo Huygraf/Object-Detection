@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Specifies the character encoding for the document-->
     <meta charset="UTF-8">
+    <!--Set the viewpoint to the device's specs-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Object Detection App</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
+            font-family: Arial, sans-serif; /* Set default font*/
+            max-width: 800px; /* Set width limit*/
+            margin: 0 auto; /*Center the content horizontally on page y-axis=0,x-axis=auto*/
+            padding: 20px; 
+            /* Adds 20 pixels of space inside the body content, 
+            preventing content from touching the edges of the window */
+            text-align: center; /* center all inline content within the body */
             background-color: #f5f5f5;
         }
         h1 {
@@ -19,15 +23,14 @@
         .upload-container {
             background-color: white;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px; /* Rounds the corners of the container */
             margin-top: 30px;
         }
         .upload-btn {
             background-color: #4CAF50;
             color: white;
             padding: 12px 24px;
-            border: none;
+            border: none; /* Remove default border */
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
@@ -49,6 +52,8 @@
             text-align: left;
             max-height: 150px;
             overflow-y: auto;
+            /* If the content (file list) exceeds the max-height,
+            a vertical scrollbar will appear */
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -66,44 +71,65 @@
     </style>
 </head>
 <body>
+    <!--Main heading-->
     <h1>Object Detection with YOLO</h1>
     
+    <!--Describing about the application-->
     <div class="description">
         <p>Upload images to detect common objects using YOLO with a pre-trained model.</p>
         <p>The model can detect objects from the COCO dataset including people, cars, animals, and more.</p>
-        <p><strong>Now with multi-image upload support!</strong></p>
     </div>
     
+    <!--Upload module-->
     <div class="upload-container">
         <h2>Upload Images</h2>
+        <!--Uploading files procession-->
         <form action="/upload" method="post" enctype="multipart/form-data">
+            <!--Choosing files container-->
             <div class="file-input">
-                <input type="file" name="images" id="image-input" accept="image/jpeg, image/png, image/jpg, image/webp" multiple required>
+                <input type="file" name="images" id="image-input" 
+                accept="image/jpeg, image/png, image/jpg, image/webp" 
+                multiple required>
             </div>
+            <!--After choosing files, display list of choosen files-->
             <div id="selected-files" class="selected-files">
                 <h3>Selected Files:</h3>
+                <!--Only display when Javascript actives-->
                 <ul id="file-list" class="file-list"></ul>
             </div>
+            <!--Submitting files button-->
             <button type="submit" class="upload-btn">Detect Objects</button>
         </form>
     </div>
 
     <script>
+        // Select HTML input element with id, in this case id = 'image-input'
+        // Make changes when input element's elements have changes
         document.getElementById('image-input').addEventListener('change', function(e) {
+            // Gets a reference to the <ul> element where the file names will be listed
             const fileList = document.getElementById('file-list');
+
+            // Gets a reference to the div container that holds 
+            // the "Selected Files" heading and the list
             const selectedFiles = document.getElementById('selected-files');
             
             // Clear previous file list
             fileList.innerHTML = '';
             
             if (this.files.length > 0) {
+                // If choosen files exist, display them
+                // CSS: display = None -> block
                 selectedFiles.style.display = 'block';
                 
                 // Add each file to the list
                 for (let i = 0; i < this.files.length; i++) {
                     const file = this.files[i];
                     const li = document.createElement('li');
-                    li.textContent = file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)';
+                    li.textContent = file.name + 
+                    ' (' + (file.size / 1024).toFixed(2) + ' KB)';
+                    // original file.size is bytes, /1024 is converting it to KB
+
+                    // Add file to file list
                     fileList.appendChild(li);
                 }
             } else {

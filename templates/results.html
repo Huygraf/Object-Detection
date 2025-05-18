@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Specifies the character encoding for the document-->
     <meta charset="UTF-8">
+    <!--Set the viewpoint to the device's specs-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multiple Object Detection Results</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
+            font-family: Arial, sans-serif; /* Set default font*/
+            max-width: 1200px; /* Set width limit*/
+            margin: 0 auto; /*Center the content horizontally on page y-axis=0,x-axis=auto*/
             padding: 20px;
-            text-align: center;
+            text-align: center; /* center all inline content within the body */
             background-color: #f5f5f5;
         }
         h1, h2, h3 {
@@ -18,18 +20,18 @@
         }
         .results-container {
             display: flex;
-            flex-direction: column;
-            gap: 40px;
+            flex-direction: column; /* Stack results vertically */
+            gap: 40px; /* Space between result items */
             margin-top: 30px;
         }
         .result-item {
             background-color: white;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px; /* Rounds the corners of the container */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Adds subtle shadow effect */
         }
         .result-image {
-            max-width: 100%;
+            max-width: 100%; /* Ensure image is responsive */
             max-height: 600px;
             margin: 15px 0;
             border: 1px solid #ddd;
@@ -38,7 +40,7 @@
             background-color: #4CAF50;
             color: white;
             padding: 12px 24px;
-            border: none;
+            border: none; /* Remove default border */
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
@@ -48,11 +50,6 @@
         }
         .btn:hover {
             background-color: #45a049;
-        }
-        .meta-info {
-            color: #666;
-            margin: 10px 0;
-            font-style: italic;
         }
         .detection-count {
             font-weight: bold;
@@ -72,24 +69,29 @@
     </style>
 </head>
 <body>
+    <!--Main heading-->
     <h1>Object Detection Results</h1>
     
     {% if results %}
+        <!--Container for all detection results-->
         <div class="results-container">
             {% for result in results %}
+                <!--Individual result container-->
                 <div class="result-item">
                     <h2>Results for: {{ result.filename }}</h2>
-                    <p class="meta-info">Detected <span class="detection-count">{{ result.num_detections }}</span> objects</p>
                     
+                    <!--Display detection image with Base64 encoded data-->
                     <img class="result-image" src="data:image/jpeg;base64,{{ result.img_data }}" alt="Detection Result">
                 </div>
             {% endfor %}
         </div>
         
+        <!--Button to process more images-->
         <div class="upload-more">
             <a href="/" class="btn">Process More Images</a>
         </div>
     {% else %}
+        <!--Display when no valid images were processed-->
         <div class="no-results">
             <h2>No Valid Images Processed</h2>
             <p>None of the uploaded files could be processed. Please ensure you're uploading valid image files (JPG, JPEG, PNG, WEBP).</p>
