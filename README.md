@@ -17,7 +17,7 @@ This guide provides simple instructions to install and run the Object Detection 
 - Python 3.8 or newer
 - Internet connection (required for the first run to download model components)
 
-## Easy Installation
+## Installation
 
 ### Windows Users
 
@@ -68,18 +68,27 @@ If you prefer to install dependencies manually:
 
 ## Usage
 
-1. Start the Flask server (use for manual installation):
+1. 
+   If this is the first time you run application:
+   Start the Flask server (use for manual installation):
    - Insert this code to run Flask server:
       "flask run --debug"
+   Else:
+      - Open Command Prompt (Windows) or Terminal (Mac/Linux)
+      - Navigate to the project directory
+      - Insert this code to run Flask server:
+      "flask run --debug"
+      OR:
+      Double click the `install_and_run_windows.bat`/  file
 
-2. Open your web browser and go to (use for manual installation):
+3. Open your web browser and go to (use for manual installation):
       "http://127.0.0.1:5000"
 
-3. Upload one or multiple images using the file selector
+4. Upload one or multiple images using the file selector
 
-4. Click "Detect Objects" and wait for processing
+5. Click "Detect Objects" and wait for processing
 
-5. View the results with bounding boxes and class labels for each detected object. 
+6. View the results with bounding boxes and class labels for each detected object. 
    If you want to process other images, click "Process More Images" 
 
 
@@ -89,7 +98,7 @@ If you prefer to install dependencies manually:
   - Manages the web routes, file uploads, and rendering of templates
   - Processes multiple images and passes them to the detection utilities
 
-- **util.py**: Core detection functionality
+- **procession.py**: Core detection functionality
   - `load_model()`: Loads the YOLOv11 model and configures it 
   - `get_prediction()`: Performs object detection on images
   - `draw_boxes()`: Draws bounding boxes and labels on detected objects
