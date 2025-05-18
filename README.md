@@ -89,7 +89,7 @@ If you prefer to install dependencies manually:
   - Manages the web routes, file uploads, and rendering of templates
   - Processes multiple images and passes them to the detection utilities
 
-- **util.py**: Core detection functionality
+- **procession.py**: Core detection functionality
   - `load_model()`: Loads the YOLOv11 model and configures it 
   - `get_prediction()`: Performs object detection on images
   - `draw_boxes()`: Draws bounding boxes and labels on detected objects
