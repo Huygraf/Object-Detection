@@ -9,6 +9,22 @@
 - **Web Interface**: Simple and user-friendly Flask web application
 - **GPU Acceleration**: Automatically uses CUDA if available for faster inference
 
+## Required Dependencies
+
+The application requires the following Python packages:
+
+- Flask - Web framework for the application interface
+- Pillow - Image processing library
+- torch - PyTorch for deep learning operations
+- torchvision - Computer vision utilities for PyTorch
+- numpy - Numerical computing library
+- ultralytics - YOLOv11 implementation
+- matplotlib - Plotting and visualization library
+- opencv-python - Computer vision library
+- PyYAML - YAML file parsing
+
+These dependencies will be automatically installed when following the installation instructions below.
+
 # Installation Guide for Object Detection Application
 
 This guide provides simple instructions to install and run the Object Detection application.
@@ -115,4 +131,6 @@ The YOLOv11 model is configured with:
 - IoU threshold: 0.50 (for Non-Maximum Suppression)
 - Image size: 1280px (for inference)
 - Auto-selects between CPU and CUDA (GPU) processing
+
+
 
