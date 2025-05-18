@@ -4,7 +4,7 @@ import base64
 from flask import Flask, render_template, request, redirect, url_for
 from PIL import Image
 import torch
-from util import get_prediction, draw_boxes
+from procession import get_prediction, draw_boxes
 import uuid # use for generating unique filename for uploaded images
 
 # Create new Flask application
