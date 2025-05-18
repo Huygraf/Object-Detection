@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Object Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .result-item {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .result-image {
+            max-width: 100%;
+            max-height: 600px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .meta-info {
+            color: #666;
+            margin: 10px 0;
+            font-style: italic;
+        }
+        .detection-count {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .upload-more {
+            margin: 30px 0;
+        }
+        .no-results {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Object Detection Results</h1>
+    
+    {% if results %}
+        <div class="results-container">
+            {% for result in results %}
+                <div class="result-item">
+                    <h2>Results for: {{ result.filename }}</h2>
+                    <p class="meta-info">Detected <span class="detection-count">{{ result.num_detections }}</span> objects</p>
+                    
+                    <img class="result-image" src="data:image/jpeg;base64,{{ result.img_data }}" alt="Detection Result">
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="upload-more">
+            <a href="/" class="btn">Process More Images</a>
+        </div>
+    {% else %}
+        <div class="no-results">
+            <h2>No Valid Images Processed</h2>
+            <p>None of the uploaded files could be processed. Please ensure you're uploading valid image files (JPG, JPEG, PNG, WEBP).</p>
+            <a href="/" class="btn">Try Again</a>
+        </div>
+    {% endif %}
+</body>
+</html> 
