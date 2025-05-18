@@ -31,17 +31,11 @@ detection_model = None
 # Load pre-trained model - YOLO 
 def load_model():
     try:    
-        # load yolov11 model from ultralytics
+        # Load yolov11 model from ultralytics
         detection_model = YOLO('yolo11n.pt')
-        # use gpu if available
+        # Use gpu if available
         detection_model.to('cuda' if torch.cuda.is_available() else 'cpu')
-        # set confidence threshold
-        detection_model.conf = 0.45  # confidence threshold
-        detection_model.iou = 0.50   # NMS IoU threshold
-        # set image size
-        detection_model.imgsz = 1280
-        # train model using coco dataset
-        #detection_model.train(data='coco8.yaml', epochs=5)
+        
         print("YOLOv11 model loaded successfully")
         return detection_model
     
@@ -51,84 +45,84 @@ def load_model():
         raise
 
 def get_prediction(image):
-    # get predictions from the YOLO model for the given image"
+    # Get predictions from the YOLO model for the given image"
     global detection_model
     
-    # load model if not already loaded
+    # Load model if not already loaded
     if detection_model is None:
         detection_model = load_model()
-        # set confidence threshold
-        # change confidence threshold (higher = fewer detections but more confident)
+        # Set confidence threshold
+        # Change confidence threshold (higher = fewer detections but more confident)
         detection_model.conf = 0.45  
-        # change IoU threshold for Non-Maximum Suppression
+        # Change IoU threshold for Non-Maximum Suppression
         detection_model.iou = 0.50   
-        # change input image size (larger = more accurate but slower)
+        # Change input image size (larger = more accurate but slower)
         detection_model.imgsz = 1280
-    # ensure model is in evaluation mode
+    # Ensure model is in evaluation mode
     detection_model.eval()
     
-    # run inference
-    # process results - ultralytics YOLO returns list of Results objects
+    # Run inference
+    # Process results - YOLO returns list of Results objects
     results = detection_model(image)
     
-    # extract boxes, labels, and scores from the results
+    # Extract boxes, labels, and scores from the results
     boxes = []
     scores = []
     labels = []
     
     # Process detections - results[0] contains predictions for the first image
     if len(results) > 0:
-        # convert to numpy for consistency
+        # Convert to numpy for consistency
         result_array = results[0].boxes.data.cpu().numpy()
         
-        # extract boxes (first 4 columns are x1, y1, x2, y2)
+        # Extract boxes (first 4 columns are x1, y1, x2, y2)
         boxes = result_array[:, :4]
         
-        # extract confidence scores (5th column)
+        # Extract confidence scores (5th column)
         scores = result_array[:, 4]
         
-        # extract class labels (6th column)
+        # Extract class labels (6th column)
         labels = result_array[:, 5].astype(int)
     
     return np.array(boxes), np.array(labels), np.array(scores)
 
 def draw_boxes(image, boxes, labels, scores):
-    # draw bounding boxes and labels on the image
+    # Draw bounding boxes and labels on the image
     draw_image = image.copy()
     draw = ImageDraw.Draw(draw_image)
     
-    # draw each bounding box
+    # Draw each bounding box
     for i, box in enumerate(boxes):
         x1, y1, x2, y2 = box.astype(int)
         
-        # get class name and color
+        # Get class name and color
         class_idx = labels[i]
         class_name = COCO_CLASSES[class_idx] if class_idx < len(COCO_CLASSES) else f"Class {class_idx}"
         color = tuple(COLORS[class_name] if class_name in COLORS else [0, 250, 0])
         
-        # define your custom font and size
+        # Define your custom font and size
 
-        # draw rectangle
+        # Draw rectangle
         draw.rectangle([(x1, y1), (x2, y2)], outline=color, width=2)
         
-        # display class name and confidence score
+        # Display class name and confidence score
         score = scores[i]
-        # create the text string
+        # Create the text string
         text = f"{class_name}: {score:.2f}"
 
-        # get text dimensions (approximate)
+        # Get text dimensions (approximate)
         text_bbox = draw.textbbox((0, 0), text)
         text_width = text_bbox[2] - text_bbox[0]
         text_height = text_bbox[3] - text_bbox[1]
 
-        # position the text inside the bounding box (at the top)
+        # Position the text inside the bounding box (at the top)
         text_x = x1 + 2  # 2 pixels margin from left edge
         text_y = y1 + 2  # 2 pixels margin from top edge
 
-        # draw text background (optional)
+        # Draw text background (optional)
         draw.rectangle([(text_x, text_y), (text_x + text_width, text_y + text_height +2)], fill = color)
 
-        # draw the text
-        draw.text((text_x, text_y), text, fill=(255, 255, 255)) # white text
+        # Draw the text
+        draw.text((text_x, text_y), text, fill=(255, 255, 255)) # White text
     
     return draw_image 

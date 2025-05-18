@@ -79,7 +79,8 @@
                 <!--Individual result container-->
                 <div class="result-item">
                     <h2>Results for: {{ result.filename }}</h2>
-                    
+                    <p class="meta-info">Detected <span class="detection-count">
+                    {{ result.num_detections }}</span> objects</p>
                     <!--Display detection image with Base64 encoded data-->
                     <img class="result-image" src="data:image/jpeg;base64,{{ result.img_data }}" alt="Detection Result">
                 </div>
@@ -94,7 +95,8 @@
         <!--Display when no valid images were processed-->
         <div class="no-results">
             <h2>No Valid Images Processed</h2>
-            <p>None of the uploaded files could be processed. Please ensure you're uploading valid image files (JPG, JPEG, PNG, WEBP).</p>
+            <p>None of the uploaded files could be processed.
+               Please ensure you're uploading valid image files (JPG, JPEG, PNG, WEBP).</p>
             <a href="/" class="btn">Try Again</a>
         </div>
     {% endif %}
