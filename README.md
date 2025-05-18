@@ -17,7 +17,7 @@ This guide provides simple instructions to install and run the Object Detection 
 - Python 3.8 or newer
 - Internet connection (required for the first run to download model components)
 
-## Easy Installation
+## Installation
 
 ### Windows Users
 
