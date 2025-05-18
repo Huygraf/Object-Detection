@@ -14,7 +14,7 @@
 1. 
    ** If you install from Github, clone the repository:
    # Open Command Promt (Windows) /  Terminal (macOS/Linux)
-   Direct to the path where you want to store application
+   Direct to the path where you want to store application.
    Then insert these code respectively:
    
    "git clone https://github.com/Huygraf/Object-Detection.git"
