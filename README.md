@@ -14,8 +14,12 @@
 1. 
    ** If you install from Github, clone the repository:
    # Open Command Promt (Windows) /  Terminal (macOS/Linux)
-   git clone https://github.com/yourusername/yolo-object-detection.git
-   cd yolo-object-detection
+   Direct to the path where you want to store application
+   Then insert these code respectively:
+   
+   "git clone https://github.com/Huygraf/Object-Detection.git"
+   
+   "cd Object_Detection"
 
    ** If you install from source folder, download archive file and extract them.
 
